@@ -28,3 +28,21 @@ jobs:
         env:
           VALIDATE_ALL_CODEBASE: false
           DEFAULT_BRANCH: main
+      - name: Generate report
+        run: echo "<h1>My Report</h1>" > report.html
+      - name: Upload report
+        uses: actions/upload-artifact@v3
+        with:
+          name: report-html
+          path: report.html
+  
+  Show-Report:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download report
+        needs: report-html
+        uses: actions/download-artifact@v3
+        with:
+          name: report-html
+          path: report-new.html
+      - run: cat report-new.html
