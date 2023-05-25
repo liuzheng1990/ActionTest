@@ -38,9 +38,9 @@ jobs:
   
   Show-Report:
     runs-on: ubuntu-latest
+    needs: Super-Linting
     steps:
       - name: Download report
-        needs: report-html
         uses: actions/download-artifact@v3
         with:
           name: report-html
